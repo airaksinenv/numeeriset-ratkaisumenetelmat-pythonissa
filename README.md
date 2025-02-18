@@ -11,6 +11,7 @@ Implementoidut ja testatut menetelmät:
 
 - Jakovälimenetelmä
 - Falsi-menetelmä
+- Newton-Raphson-menetelmä
 
 Implementoidut funktiot löytyvät tiedostosta `funcs.py` ja niiden testaamiset tiedostosta `testing.ipynb`
 
@@ -34,3 +35,9 @@ Menetelmä käyttää lineaarista interpolointia ja valitsee pisteen lähempän�
 Falsi-menetelmä ei kuitenkaan ole täydellinen, sillä se voi joissakin tapauksissa hidastua, jos funktio on vahvasti epäsymmetrinen
 
 Kiteytettynä falsi-menetelmä parantaa jakovälimenetelmää siinä mielessä, että se käyttää ei vain välin päätepisteitä, vaan myös arvioi väliä tarkemmin interpoloinnin avulla.
+
+### Newton-Raphson-menetelmä
+
+Newton-Raphson-menetelmä on tehokas numeerinen menetelmä, joka perustuu funktion tangentin käyttäytymiseen juurensa ympäristössä. Menetelmä etsii funktion juurta lähestymällä sitä iteratiivisesti, jossa uusi arvio juuresta saadaan edellisestä arvioista, funktion arvosta ja sen derivaatasta.
+
+Menetelmä konvergoituu yleensä nopeasti, erityisesti kun alkuarvaus on lähellä oikeaa juurta ja funktio on hyvin käyttäytyvä. Newton-Raphson-menetelmän etuna on sen nopea konvergenssi, mutta se voi epäonnistua, jos alkuarvaus on huono, derivaatta on nolla jollain arvolla tai funktio sisältää paikallisia minimejä tai maksimejä, jolloin se voi jäädä jumiin väärään ratkaisuun.

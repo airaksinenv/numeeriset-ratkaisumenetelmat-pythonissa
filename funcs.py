@@ -1,7 +1,6 @@
 # Menetelmien implementointi pythoniin
 
 # Jakovälimenetelmä
-
 def bisection_method(func, a, b, error_accept):
     """
     Jakovälimenetelmä (bisection method) funktion juuren etsimiseen.
@@ -49,6 +48,7 @@ def bisection_method(func, a, b, error_accept):
     # Palautetaan arvioitu juuri (välin keskipiste)
     return (a + b) / 2
 
+# Falsi-menetelmä
 def regula_falsi(func, a, b, error_accept):
     """
     Falsi-menetelmä (Regula Falsi) funktion juuren etsimiseen.
@@ -96,3 +96,51 @@ def regula_falsi(func, a, b, error_accept):
         error = abs(b - a)
 
     return c  # Palautetaan arvioitu juuri
+
+# Newton raphson -menetelmä
+def newton_raphson(func, func_prime, x0, error_accept, max_iter=100):
+    """
+    Newton-Raphson-menetelmä funktion juuren etsimiseen.
+
+    Parametrit:
+    func (function): Funktio, jonka juuri halutaan löytää (esim. lambda x: x**2 - 2).
+    func_prime (function): Funktion derivoitu versio (derivaatta).
+    x0 (float): Alkuarvaus juurelle.
+    error_accept (float): Hyväksyttävän virheen raja.
+    max_iter (int): Maksimimäärä iteraatioita (vapaaehtoinen, oletus 100).
+
+    Palauttaa:
+    float: Arvioitu juuren arvo, jos se löytyy annetulla tarkkuudella.
+    
+    Heittää:
+    ValueError: Jos konvergenssia ei saavuteta annetussa maksimimäärässä iteraatioita.
+    """
+    
+    x = x0  # Alustetaan alkupiste
+    for i in range(max_iter):
+        fx = func(x)  # Funktioarvo
+        fx_prime = func_prime(x)  # Derivaatta-arvo
+        
+        # Tarkistetaan, ettei derivaatta ole nolla (jotta voidaan jakaa sillä)
+        if fx_prime == 0:
+            raise ValueError(f"Derivaatta on nolla kohdassa x = {x}, menetelmä ei toimi.")
+        
+        # Lasketaan seuraava arvio juurelle
+        x_new = x - fx / fx_prime
+        
+        # Lasketaan virhe
+        error = abs(x_new - x)
+        
+        # Tulostetaan iteroinnin eteneminen
+        print(f"Iteraatio {i+1}: Arvio juurelle: {x_new}")
+        print(f"Nykyinen virhe: {error}\n")
+        
+        # Tarkistetaan, onko virhe tarpeeksi pieni
+        if error < error_accept:
+            return x_new  # Palautetaan arvioitu juuri
+        
+        # Päivitetään arvio seuraavalle iteraatiolle
+        x = x_new
+    
+    # Jos konvergenssia ei saavuteta, heitetään virhe
+    raise ValueError(f"Konvergenssia ei saavutettu {max_iter} iteraation aikana.")
