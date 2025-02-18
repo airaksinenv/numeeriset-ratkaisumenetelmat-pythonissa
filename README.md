@@ -1,2 +1,5 @@
-# numeeriset-ratkaisumenetelmat-pythonissa
-Tämä repository sisältää erilaisia yhtälön numeeristen ratkaisumenetelmien implementaatioita ja niiden testailua pythonissa.
+# Yhtälön numeeriset ratkaisumenetelmät pythonissa
+
+-Valtteri Airaksinen
+
+---
