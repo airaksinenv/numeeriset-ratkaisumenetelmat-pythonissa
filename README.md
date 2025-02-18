@@ -12,6 +12,7 @@ Implementoidut ja testatut menetelmät:
 - Jakovälimenetelmä
 - Falsi-menetelmä
 - Newton-Raphson-menetelmä
+- Sekanttimenetelmä
 
 Implementoidut funktiot löytyvät tiedostosta `funcs.py` ja niiden testaamiset tiedostosta `testing.ipynb`
 
@@ -41,3 +42,9 @@ Kiteytettynä falsi-menetelmä parantaa jakovälimenetelmää siinä mielessä, 
 Newton-Raphson-menetelmä on tehokas numeerinen menetelmä, joka perustuu funktion tangentin käyttäytymiseen juurensa ympäristössä. Menetelmä etsii funktion juurta lähestymällä sitä iteratiivisesti, jossa uusi arvio juuresta saadaan edellisestä arvioista, funktion arvosta ja sen derivaatasta.
 
 Menetelmä konvergoituu yleensä nopeasti, erityisesti kun alkuarvaus on lähellä oikeaa juurta ja funktio on hyvin käyttäytyvä. Newton-Raphson-menetelmän etuna on sen nopea konvergenssi, mutta se voi epäonnistua, jos alkuarvaus on huono, derivaatta on nolla jollain arvolla tai funktio sisältää paikallisia minimejä tai maksimejä, jolloin se voi jäädä jumiin väärään ratkaisuun.
+
+### Sekanttimenetelmä
+
+Sekanttimenetelmä on numeerinen menetelmä, joka on samankaltainen kuin Newton-Raphson, mutta se ei vaadi funktion derivaatan laskemista. Sen sijaan menetelmä käyttää kahta peräkkäistä pistettä ja arvioi derivaatan sen perusteella. Tämä tekee menetelmästä kätevän, kun derivaatan laskeminen on hankalaa tai ei ole saatavilla.
+
+Sekanttimenetelmä voi olla hyödyllinen, kun derivaatan laskeminen on hankalaa. Se voi kuitenkin olla hitaampi ja epävarmempi kuin Newton-Raphson, erityisesti huonosti käyttäytyvillä funktioilla. Menetelmä vaatii kaksi alkuarvausta ja voi olla herkkä niiden valinnalle.

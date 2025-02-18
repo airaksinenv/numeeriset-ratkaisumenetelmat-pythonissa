@@ -144,3 +144,47 @@ def newton_raphson(func, func_prime, x0, error_accept, max_iter=100):
     
     # Jos konvergenssia ei saavuteta, heitetään virhe
     raise ValueError(f"Konvergenssia ei saavutettu {max_iter} iteraation aikana.")
+
+# Sekantti -menetelmä
+def secant(func, x0, x1, error_accept, max_iter=100):
+    """
+    Secant-menetelmä funktion juuren etsimiseen ilman derivaatan laskemista.
+
+    Parametrit:
+    func (function): Funktio, jonka juuri halutaan löytää (esim. lambda x: x**2 - 2).
+    x0 (float): Ensimmäinen arvio juuresta.
+    x1 (float): Toinen arvio juuresta.
+    error_accept (float): Hyväksyttävän virheen raja.
+    max_iter (int): Maksimimäärä iteraatioita ennen virheen heittämistä.
+
+    Palauttaa:
+    float: Arvioitu juuren arvo, jos se löytyy annetulla tarkkuudella.
+    
+    Heittää:
+    ValueError: Jos menetelmä ei konvergoidu annetun virherajan puitteissa.
+    """
+    
+    error = abs(x1 - x0)  # Alustetaan virhe
+    iter_count = 0  # Iteraatiolaskuri
+
+    while error > error_accept and iter_count < max_iter:
+        # Lasketaan uusi arvio käyttäen secant-kaavaa
+        x2 = x1 - (func(x1) * (x1 - x0)) / (func(x1) - func(x0))
+        
+        # Päivitetään virhe
+        error = abs(x2 - x1)
+
+        # Päivitetään arvot
+        x0, x1 = x1, x2
+        iter_count += 1
+
+        # Tulostetaan iteroinnin eteneminen
+        print(f"Nykyinen arvio juurelle: {x2}")
+        print(f"Nykyinen virhe: {error}")
+        print(f"Uusi arvio: {x2}\n")
+    
+    # Tarkistetaan, onko menetelmä konvergoitunut
+    if iter_count >= max_iter:
+        raise ValueError("Menetelmä ei konvergoitunut annetun iteraatiomäärän puitteissa.")
+
+    return x2  # Palautetaan arvioitu juuri
