@@ -48,3 +48,51 @@ def bisection_method(func, a, b, error_accept):
 
     # Palautetaan arvioitu juuri (välin keskipiste)
     return (a + b) / 2
+
+def regula_falsi(func, a, b, error_accept):
+    """
+    Falsi-menetelmä (Regula Falsi) funktion juuren etsimiseen.
+
+    Parametrit:
+    func (function): Funktio, jonka juuri halutaan löytää (esim. lambda x: x**2 - 2).
+    a (float): Välin vasen raja.
+    b (float): Välin oikea raja.
+    error_accept (float): Hyväksyttävän virheen raja.
+
+    Palauttaa:
+    float: Arvioitu juuren arvo, jos se löytyy annetulla tarkkuudella.
+    
+    Heittää:
+    ValueError: Jos funktion arvo ei vaihda merkkiä annetulla välillä.
+    """
+    
+    # Tarkistetaan, että funktio vaihtaa merkkiä annetulla välillä
+    if func(a) * func(b) >= 0:
+        raise ValueError("Ei juurta tai useita juuria annetulla välillä, menetelmä ei toimi.")
+
+    error = abs(b - a)  # Alustetaan virhevälillä (b - a)
+    c = a  # Alustetaan c muuttuja
+    
+    while error > error_accept:
+        # Lasketaan uusi piste c käyttäen regula falsi -kaavaa
+        c = (a * func(b) - b * func(a)) / (func(b) - func(a))
+        
+        # Tulostetaan iteroinnin eteneminen
+        print(f"Nykyinen arvio juurelle: {c}")
+        print(f"Nykyinen virhe: {error}")
+        print(f"Uusi alaraja a: {a}, uusi yläraja b: {b}\n")
+        
+        # Tarkistetaan, onko juuri löytynyt tarkasti
+        if func(c) == 0:
+            break
+        
+        # Päivitetään väli samalla tavalla kuin jakovälimenetelmässä
+        elif func(c) * func(a) < 0:
+            b = c  # Juuri on vasemmalla puolella
+        else:
+            a = c  # Juuri on oikealla puolella
+        
+        # Päivitetään virhe uuden välin perusteella
+        error = abs(b - a)
+
+    return c  # Palautetaan arvioitu juuri
